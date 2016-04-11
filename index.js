@@ -1,5 +1,6 @@
 var React = require('react');
 var evaluate = require('eval');
+var ReactDOM = require('react-dom');
 
 // src can be either a filename or a chunk name
 function ReactToHtmlWebpackPlugin(destPath, src, options) {
@@ -22,7 +23,7 @@ ReactToHtmlWebpackPlugin.prototype.apply = function(compiler) {
       var source = asset.source();
       var Component = evaluate(source, /* filename: */ undefined, /* scope: */ undefined, /* includeGlobals: */ true);
       var renderMethod = this.options.static ? 'renderToStaticMarkup' : 'renderToString';
-      var html = React[renderMethod](React.createElement(Component));
+      var html = ReactDOM[renderMethod](React.createElement(Component));
 
       var template = this.options.template;
 
